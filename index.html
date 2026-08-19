@@ -1,11 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
-    <meta charset="utf-8">
-    <title>我的网站</title>
+    <meta charset="UTF-8">
+    <title>坐标计算工具</title>
 </head>
 <body>
-    <h1>欢迎来到我的坐标计算网站！</h1>
-    <p>网站正在顺利运行中。</p>
+    <h1>坐标计算器</h1>
+    <p>请输入数据进行简单的计算：</p>
+    
+    <input type="number" id="num1" placeholder="数字 1">
+    <input type="number" id="num2" placeholder="数字 2">
+    <button onclick="calculate()">相加计算</button>
+    
+    <h2 id="result">结果：</h2>
+
+    <script>
+        function calculate() {
+            var n1 = parseFloat(document.getElementById('num1').value);
+            var n2 = parseFloat(document.getElementById('num2').value);
+            document.getElementById('result').innerText = "结果：" + (n1 + n2);
+        }
+    </script>
 </body>
 </html>
