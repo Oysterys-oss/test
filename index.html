@@ -1,15 +1,77 @@
-<html>
-<body>
-    <h3>简易计算器</h3>
-    <input id="n1" type="number"> + <input id="n2" type="number">
-    <button onclick="calc()">=</button>
-    <b id="res">?</b>
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>Windows 正在更新</title>
+    <style>
+        body {
+            background-color: #0078d7; /* Windows 蓝屏/升级经典蓝背景 */
+            color: white;
+            font-family: "Segoe UI", Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            cursor: none; /* 隐藏鼠标光标更逼真 */
+            user-select: none;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top: 5px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 30px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 16px;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body onclick="toggleFullscreen()">
+
+    <div class="spinner"></div>
+    <h1>正在進行 Windows 11 更新</h1>
+    <p><span id="percent">0</span>% 完成</p>
+    <p style="font-size: 12px; opacity: 0.7; position: absolute; bottom: 30px;">請勿關閉電腦。這可能需要一些時間。</p>
 
     <script>
-        function calc() {
-            let n1 = document.getElementById('n1').value;
-            let n2 = document.getElementById('n2').value;
-            document.getElementById('res').innerText = Number(n1) + Number(n2);
+        let p = 0;
+        const percentElem = document.getElementById('percent');
+        
+        // 模拟升级进度卡顿
+        let timer = setInterval(() => {
+            if (p < 99) {
+                // 随机增加进度，越到后面越慢
+                let jump = Math.random() > 0.7 ? 1 : 0;
+                if (p > 85) jump = Math.random() > 0.9 ? 1 : 0;
+                p += jump;
+                percentElem.innerText = p;
+            }
+        }, 800); // 数字越大进度越慢
+
+        // 点击屏幕可以进入全屏，逼真度拉满
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
         }
     </script>
 </body>
